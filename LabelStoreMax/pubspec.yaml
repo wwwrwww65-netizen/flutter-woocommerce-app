@@ -60,6 +60,27 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^1.0.8
+  # Firebase core + services
+  cloud_functions: ^5.1.4
+  firebase_auth: ^5.3.4
+  firebase_analytics: ^11.3.5
+  firebase_crashlytics: ^4.1.4
+  firebase_remote_config: ^5.1.4
+  firebase_storage: ^13.3.4
+  # Auth
+  google_sign_in: ^6.2.2
+  # Local DB and search
+  sqflite: ^2.3.3+1
+  path: ^1.9.0
+  path_provider: ^2.1.4
+  # Media picking
+  image_picker: ^1.1.2
+  # IAP
+  in_app_purchase: ^3.1.14
+  # Ads
+  google_mobile_ads: ^5.1.0
+  facebook_audience_network: ^1.0.1
+  app_tracking_transparency: ^2.0.5
 
 dev_dependencies:
   flutter_launcher_icons: ^0.14.4

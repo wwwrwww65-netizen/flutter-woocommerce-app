@@ -12,6 +12,10 @@ void main() async {
       navigatorKey: NyNavigator.instance.router.navigatorKey,
       onGenerateRoute: nylo.router!.generator(),
       initialRoute: nylo.getInitialRoute(),
+      supportedLocales: const [
+        Locale('en'),
+        Locale('ar'),
+      ],
       navigatorObservers: [
         ...nylo.getNavigatorObservers(),
       ],

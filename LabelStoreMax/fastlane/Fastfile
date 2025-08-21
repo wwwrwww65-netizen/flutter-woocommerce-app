@@ -1,0 +1,15 @@
+default_platform(:android)
+
+platform :android do
+  desc "Build Android AAB"
+  lane :aab do
+    gradle(task: "bundle", build_type: "Release")
+  end
+end
+
+platform :ios do
+  desc "Build iOS IPA"
+  lane :ipa do
+    build_app(scheme: "Runner")
+  end
+end

@@ -1,5 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:wp_json_api/models/wp_user.dart';
 import 'package:wp_json_api/wp_json_api.dart';
 import '/bootstrap/app_helper.dart';
@@ -15,15 +18,30 @@ class FirebaseProvider implements NyProvider {
 
   @override
   afterBoot(Nylo nylo) async {
+    // Initialize Firebase (always)
+    await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
+    // Initialize Analytics/Crashlytics/Remote Config
+    try {
+      await FirebaseAnalytics.instance.setAnalyticsCollectionEnabled(true);
+    } catch (_) {}
+    try {
+      await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
+    } catch (_) {}
+    try {
+      final remoteConfig = FirebaseRemoteConfig.instance;
+      await remoteConfig.setConfigSettings(RemoteConfigSettings(
+        fetchTimeout: const Duration(seconds: 10),
+        minimumFetchInterval: const Duration(hours: 1),
+      ));
+      await remoteConfig.fetchAndActivate();
+    } catch (_) {}
+
     bool? firebaseFcmIsEnabled =
         AppHelper.instance.appConfig?.firebaseFcmIsEnabled;
     firebaseFcmIsEnabled ??= getEnv('FCM_ENABLED', defaultValue: false);
 
     if (firebaseFcmIsEnabled != true) return;
-
-    await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform,
-    );
 
     FirebaseMessaging messaging = FirebaseMessaging.instance;
     NotificationSettings settings = await messaging.requestPermission(
