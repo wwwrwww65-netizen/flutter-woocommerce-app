@@ -1,4 +1,4 @@
-name: Build APK and Commit Artifact
+name: Build APK (Artifact Only)
 
 on:
   workflow_dispatch:
@@ -39,13 +39,4 @@ jobs:
           name: app-debug-apk
           path: LabelStoreMax/build/app/outputs/flutter-apk/app-debug.apk
 
-      - name: Commit APK artifact
-        if: ${{ !contains(github.event.head_commit.message, '[artifact]') }}
-        run: |
-          mkdir -p build-artifacts/android
-          cp LabelStoreMax/build/app/outputs/flutter-apk/app-debug.apk build-artifacts/android/app-debug.apk
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add build-artifacts/android/app-debug.apk
-          git commit -m "chore: add debug APK artifact [artifact]" || echo "No changes to commit"
-          git push origin HEAD:MASTER
+      # No commit to repo; APK is available only as a CI artifact
