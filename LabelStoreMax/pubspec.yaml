@@ -108,3 +108,4 @@ flutter:
     - public/images/
     - lang/
     - .env
+  # Splash/launcher configurations (if using native) can be added via flutter_native_splash

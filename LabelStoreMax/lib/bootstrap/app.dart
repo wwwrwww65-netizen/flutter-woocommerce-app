@@ -68,50 +68,56 @@ class AppBuild extends StatelessWidget {
             builder: (themeContext) => ValueListenableBuilder(
               valueListenable:
                   ValueNotifier(locale ?? NyLocalization.instance.locale),
-              builder: (context, Locale locale, _) => MaterialApp(
-                navigatorKey: navigatorKey,
-                themeMode: themeMode,
-                onGenerateTitle: onGenerateTitle,
-                onGenerateInitialRoutes: onGenerateInitialRoutes,
-                onUnknownRoute: onUnknownRoute,
-                builder: builder,
-                navigatorObservers: navigatorObservers,
-                color: color,
-                debugShowMaterialGrid: debugShowMaterialGrid,
-                showPerformanceOverlay: showPerformanceOverlay,
-                checkerboardRasterCacheImages: checkerboardRasterCacheImages,
-                checkerboardOffscreenLayers: checkerboardOffscreenLayers,
-                showSemanticsDebugger: showSemanticsDebugger,
-                debugShowCheckedModeBanner: debugShowCheckedModeBanner,
-                shortcuts: shortcuts,
-                actions: actions,
-                title: title ?? "",
-                initialRoute: initialRoute,
-                onGenerateRoute: onGenerateRoute,
-                darkTheme: darkTheme ??
-                    appThemes
-                        .firstWhere(
-                            (theme) => theme.id == getEnv('DARK_THEME_ID'),
-                            orElse: () => appThemes.first)
-                        .data,
-                theme: themeData ?? ThemeProvider.themeOf(context).data,
-                localeResolutionCallback:
-                    (Locale? locale, Iterable<Locale> supportedLocales) {
-                  return locale;
-                },
-                localizationsDelegates: NyLocalization.instance.delegates,
-                locale: NyLocalization.instance.locale,
-                supportedLocales: supportedLocales,
-                // Ensure RTL is applied automatically for Arabic
-                builder: (ctx, child) {
-                  final Locale current = NyLocalization.instance.locale;
-                  final TextDirection direction =
-                      (current.languageCode.toLowerCase() == 'ar')
-                          ? TextDirection.rtl
-                          : TextDirection.ltr;
-                  return Directionality(textDirection: direction, child: child!);
-                },
-              ),
+              builder: (context, Locale locale, _) {
+                final TransitionBuilder? outerBuilder = builder;
+                return MaterialApp(
+                  navigatorKey: navigatorKey,
+                  themeMode: themeMode,
+                  onGenerateTitle: onGenerateTitle,
+                  onGenerateInitialRoutes: onGenerateInitialRoutes,
+                  onUnknownRoute: onUnknownRoute,
+                  builder: (ctx, child) {
+                    final Widget wrapped = Builder(
+                      builder: (innerCtx) {
+                        final Locale current = NyLocalization.instance.locale;
+                        final TextDirection direction =
+                            (current.languageCode.toLowerCase() == 'ar')
+                                ? TextDirection.rtl
+                                : TextDirection.ltr;
+                        return Directionality(textDirection: direction, child: child!);
+                      },
+                    );
+                    return outerBuilder != null ? outerBuilder(ctx, wrapped) : wrapped;
+                  },
+                  navigatorObservers: navigatorObservers,
+                  color: color,
+                  debugShowMaterialGrid: debugShowMaterialGrid,
+                  showPerformanceOverlay: showPerformanceOverlay,
+                  checkerboardRasterCacheImages: checkerboardRasterCacheImages,
+                  checkerboardOffscreenLayers: checkerboardOffscreenLayers,
+                  showSemanticsDebugger: showSemanticsDebugger,
+                  debugShowCheckedModeBanner: debugShowCheckedModeBanner,
+                  shortcuts: shortcuts,
+                  actions: actions,
+                  title: title ?? "",
+                  initialRoute: initialRoute,
+                  onGenerateRoute: onGenerateRoute,
+                  darkTheme: darkTheme ??
+                      appThemes
+                          .firstWhere(
+                              (theme) => theme.id == getEnv('DARK_THEME_ID'),
+                              orElse: () => appThemes.first)
+                          .data,
+                  theme: themeData ?? ThemeProvider.themeOf(context).data,
+                  localeResolutionCallback:
+                      (Locale? locale, Iterable<Locale> supportedLocales) {
+                    return locale;
+                  },
+                  localizationsDelegates: NyLocalization.instance.delegates,
+                  locale: NyLocalization.instance.locale,
+                  supportedLocales: supportedLocales,
+                );
+              },
             ),
           ),
         ),

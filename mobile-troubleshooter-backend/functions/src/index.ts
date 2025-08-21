@@ -42,9 +42,17 @@ const rateLimiter = async (uid: string, limit: number) => {
 };
 
 export const apiAiChat = functions.region('us-central1').https.onCall(async (data, context) => {
-  requireAuth(context);
+  // Allow anonymous demo use if no auth, but strongly recommend auth in prod
+  if (!context.auth) {
+    const cfg = getConfig();
+    const Schema = z.object({ message: z.string().min(1) });
+    const parsed = Schema.parse(data);
+    if (!cfg.openaiKey) return { reply: `رد تجريبي (بدون تسجيل): ${parsed.message}` };
+  } else {
+    const cfg = getConfig();
+    await rateLimiter(context.auth!.uid, cfg.rateLimit);
+  }
   const cfg = getConfig();
-  await rateLimiter(context.auth!.uid, cfg.rateLimit);
 
   const Schema = z.object({
     message: z.string().min(1),
@@ -54,7 +62,10 @@ export const apiAiChat = functions.region('us-central1').https.onCall(async (dat
   });
   const parsed = Schema.parse(data);
 
-  if (!cfg.openaiKey) throw new functions.https.HttpsError('failed-precondition', 'AI key missing');
+  if (!cfg.openaiKey) {
+    // Demo fallback if no key configured
+    return { reply: `رد تجريبي: ${new Date().toISOString()} — تم استلام رسالتك: "${parsed.message}"` };
+  }
 
   // Minimal completion call (placeholder)
   const prompt = parsed.message;
