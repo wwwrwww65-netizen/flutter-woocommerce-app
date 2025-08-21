@@ -1,0 +1,12 @@
+[
+  {"id":"a1","title":"Getting Started","content":"<h1>Getting Started</h1><p>Welcome to Mobile Troubleshooter.</p>","premium":false},
+  {"id":"a2","title":"Battery Drains Fast","content":"<h1>Battery Drains</h1><p>Reduce background usage.</p>","premium":false},
+  {"id":"a3","title":"Overheating","content":"<h1>Overheating</h1><p>Close intensive apps.</p>","premium":false},
+  {"id":"a4","title":"Camera Not Working","content":"<h1>Camera</h1><p>Reboot and check permissions.</p>","premium":true},
+  {"id":"a5","title":"Microphone Issues","content":"<h1>Microphone</h1><p>Clean mic grill.</p>","premium":true},
+  {"id":"a6","title":"Wi-Fi Drops","content":"<h1>Wi-Fi</h1><p>Forget and re-add network.</p>","premium":false},
+  {"id":"a7","title":"Bluetooth Problems","content":"<h1>Bluetooth</h1><p>Reset network settings.</p>","premium":false},
+  {"id":"a8","title":"Storage Full","content":"<h1>Storage</h1><p>Clear cache or move media.</p>","premium":true},
+  {"id":"a9","title":"Screen Flicker","content":"<h1>Screen</h1><p>Disable adaptive brightness.</p>","premium":true},
+  {"id":"a10","title":"App Crashes","content":"<h1>Apps</h1><p>Update or reinstall.</p>","premium":false}
+]

@@ -16,6 +16,11 @@ class RouteProvider implements NyProvider {
       nylo.initRoutes(initialRoute: '/no-connection');
       return;
     }
+    final String? model = await NyStorage.read(const StorageKey(key: 'FIRST_RUN_DEVICE_MODEL'));
+    if (model == null) {
+      nylo.initRoutes(initialRoute: '/onboarding-device');
+      return;
+    }
     nylo.initRoutes();
   }
 }

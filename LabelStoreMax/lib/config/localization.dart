@@ -20,14 +20,7 @@ final String? languageCode = getEnv('DEFAULT_LOCALE', defaultValue: "en");
 |-------------------------------------------------------------------------- */
 final List<String> languagesList = const [
   'en',
-  'es',
-  'fr',
-  'hi',
-  'it',
-  'pt',
-  'zh',
-  'th',
-  'id'
+  'ar',
 ];
 
 /* assetsDirectory

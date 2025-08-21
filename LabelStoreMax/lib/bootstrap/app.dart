@@ -102,6 +102,15 @@ class AppBuild extends StatelessWidget {
                 localizationsDelegates: NyLocalization.instance.delegates,
                 locale: NyLocalization.instance.locale,
                 supportedLocales: supportedLocales,
+                // Ensure RTL is applied automatically for Arabic
+                builder: (ctx, child) {
+                  final Locale current = NyLocalization.instance.locale;
+                  final TextDirection direction =
+                      (current.languageCode.toLowerCase() == 'ar')
+                          ? TextDirection.rtl
+                          : TextDirection.ltr;
+                  return Directionality(textDirection: direction, child: child!);
+                },
               ),
             ),
           ),

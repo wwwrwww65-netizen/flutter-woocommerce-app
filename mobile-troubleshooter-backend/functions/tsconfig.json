@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "lib": ["es2022"],
+    "module": "es2022",
+    "moduleResolution": "node",
+    "outDir": "lib",
+    "rootDir": "src",
+    "target": "es2022",
+    "strict": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true
+  },
+  "compileOnSave": true,
+  "include": ["src"]
+}
