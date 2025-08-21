@@ -35,6 +35,15 @@ class AccountLoginPage extends NyStatefulWidget {
 
 class _AccountLoginPageState extends NyPage<AccountLoginPage> {
   LoginForm form = LoginForm();
+  
+  Future<void> _loginWithGoogle() async {
+    // Placeholder: integrate FirebaseAuth + google_sign_in
+    showToast(
+      title: trans('Google Sign-In'),
+      description: trans('This action requires Firebase configuration.'),
+      style: ToastNotificationStyleType.info,
+    );
+  }
 
   @override
   Widget view(BuildContext context) {
@@ -96,7 +105,19 @@ class _AccountLoginPageState extends NyPage<AccountLoginPage> {
                                       data['email'], data['password']);
                                 }
                               ),
-                            ))),
+                            )),
+                        ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                    child: SizedBox(
+                      width: double.infinity,
+                      child: OutlinedButton.icon(
+                        onPressed: _loginWithGoogle,
+                        icon: Icon(Icons.login),
+                        label: Text(trans('Continue with Google')),
+                      ),
+                    ),
                   ),
                 ],
               ),

@@ -2,58 +2,54 @@
   <img width="200" height="125" src="https://woosignal.com/images/woosignal_logo_stripe_blue.png" alt="WooSignal logo">
 </p>
 
-# WooCommerce App: Label StoreMax
+# Mobile Troubleshooter (Flutter)
 
-### Label StoreMax
+### Overview
 
-[Official WooSignal WooCommerce App](https://woosignal.com)
+This app has been upgraded to the latest stable Flutter and enhanced for mobile troubleshooting content with:
 
-![alt text](https://woosignal.com/images/woocommerce_app_preview_2.png "WooCommerce app checkout experience")
-
-![alt text](https://woosignal.com/images/woocommerce_app_preview_3.png "WooCommerce app Login/Register for customers via WordPress")
-
-![alt text](https://woosignal.com/images/woocommerce_app_preview_1.png "Full integration with WooCommerce")
-
-![alt text](https://woosignal.com/images/mock_dark_light_mode.png "Dark and light mode shopping")
-
-### About Label StoreMax
-
-Label StoreMax is an App Template for WooCommerce stores. Your customers will be able to browse products, make orders and login via WordPress. You can also customise the look and feel of the app in the WooSignal dashboard.
-
-You can upload the app to the IOS app store and Google play store using Flutter.
+- RTL i18n (Arabic/English)
+- Responsive layouts (phones/tablets)
+- First-run device model selection
+- Instant local full-text search (SQLite FTS5)
+- Rich article pages (text, images, attachments) with offline save, bookmark, mark as solved
+- AI Chat UI (Firebase Functions) with streaming-ready design and screenshot upload
+- Google Sign-In (Firebase Auth)
+- Monthly IAP gating with server-side receipt validation
+- Ad scaffolding (AdMob + Facebook Audience Network) and GDPR consent flow
+- Firebase integrations: Messaging, Analytics, Crashlytics, Remote Config
+- Offline caching using local database
 
 ### Requirements
 
-- WooCommerce Store 3.5+
-- Android Studio/VSCode (for running the app)
-- Flutter installed
+- Flutter 3.24+
+- Android Studio/Xcode
+- Firebase project (FlutterFire configured)
 
 ### Getting Started
 
-1. Download/Clone this repository
-2. Sign up for free on [WooSignal](https://woosignal.com) and link your WooCommerce store
-3. Add your app key into the **.env** file and hit play (with Android Studio) to build the app 🥳
+1. flutter pub get
+2. Configure Firebase using FlutterFire; add `google-services.json` and `GoogleService-Info.plist`
+3. Replace placeholders in `.env` and native configs
+4. Run: `flutter run`
 
-Full documentation this available [here](https://woosignal.com/docs/app/label-storemax)
+Placeholders (replace in code and configs):
+
+- <<PACKAGE_NAME>>, <<IOS_BUNDLE_ID>>, <<FIREBASE_PROJECT_ID>>, <<ADMOB_APP_ID_ANDROID>>, <<ADMOB_APP_ID_IOS>>, <<FAN_PLACEMENT_ID>>, <<IAP_PRODUCT_ID_MONTHLY>>
 
 ## Some features integrated
 
 - App Store Ready
 - Simple configuration
-- Browse products, make orders, customer login (via WordPress)
-- Change app name, logo, customize default language, currency + more
+- Localized for en, ar
 - Light and dark mode
-- Stripe, Cash On Delivery, PayPal, RazorPay
-- Localized for en, es, pt, it, hi, fr, zh, tr, nl, de, id, th
-- Orders show as normal in WooCommerce
-
-## Security Vulnerabilities
-If you discover a security vulnerability within WooSignal, please send an e-mail support@woosignal.com
+- Google Sign-In, IAP, Ads
+- Firebase Messaging, Analytics, Crashlytics, Remote Config
 
 ## Uploading to the app stores
 
-- [IOS - Deployment](https://flutter.dev/docs/deployment/ios)
-- [Android - Deployment](https://flutter.dev/docs/deployment/android)
+- iOS - Deployment: https://flutter.dev/docs/deployment/ios
+- Android - Deployment: https://flutter.dev/docs/deployment/android
 
 ## Licence
-The Label StoreMax framework is open-sourced software licensed under the MIT license.
+The app is open-sourced software licensed under the MIT license.

@@ -25,12 +25,18 @@ import '/resources/pages/product_image_viewer_page.dart';
 import '/resources/pages/product_reviews_page.dart';
 import '/resources/pages/wishlist_page_widget.dart';
 import 'package:nylo_framework/nylo_framework.dart';
+import '/resources/pages/onboarding_device_page.dart';
+import '/resources/pages/article_detail_rich_page.dart';
+import '/resources/pages/ai_chat_page.dart';
 
 /* App Router
 |-------------------------------------------------------------------------- */
 
 appRouter() => nyRoutes((router) {
       router.add(HomePage.path).initialRoute();
+      router.add(OnboardingDevicePage.path);
+      router.add(ArticleDetailRichPage.path);
+      router.add(AiChatPage.path);
 
       router.add(CartPage.path);
 
