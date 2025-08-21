@@ -33,6 +33,12 @@ jobs:
           cd LabelStoreMax
           flutter build apk --debug
 
+      - name: Upload APK as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-debug-apk
+          path: LabelStoreMax/build/app/outputs/flutter-apk/app-debug.apk
+
       - name: Commit APK artifact
         if: ${{ !contains(github.event.head_commit.message, '[artifact]') }}
         run: |
